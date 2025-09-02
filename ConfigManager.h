@@ -52,7 +52,7 @@ public:
 
     // Configuration operations.
     std::map<std::string, cheat_settings>& get_config_list();
-    cheat_settings* _get_config_settings(); // retarded
+    cheat_settings* _get_config_settings(); // old
     cheat_settings* get_current_settings();
     cheat_settings* get_config_by_name(const std::string& config_name);
 
@@ -69,7 +69,7 @@ public:
     // Clipboard operations.
     bool import_from_clipboard_and_create_new_config();
     bool import_from_clipboard();
-    void copy_to_clipboard(const cheat_settings& settings); // export
+    void copy_to_clipboard(const cheat_settings& settings); // export to clipboard
 
     // Rename a config.
     bool rename_config(const std::string& old_name, const std::string& new_name);
