@@ -46,7 +46,8 @@ int main()
         std::cout << "Config created: styled_profile\n";
     }
 
-    // 2) Modify settings (enable aimbot, change FOV, select style index. Ideally this would be accessed through ImGUI with e.g. sliders, user input, toggles, etc)
+    // 2) Modify settings (enable aimbot, change FOV, select style index.
+    // Ideally this would be accessed through ImGUI with e.g. sliders, user input, toggles, etc)
     cheat_settings* s = mgr.get_current_settings();
     if (s) {
         s->b_aimbot = true;
