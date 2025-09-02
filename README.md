@@ -38,7 +38,7 @@ int main()
     auto &mgr = config_manager::get_instance();
 
     // 1) Create a new config (creates file under %APPDATA%\brasilhook\<name>.json)
-    mgr.create_config("my_profile");
+    mgr.create_config("new_profile");
 
     // 2) Get pointer to current settings and modify them
     cheat_settings* s = mgr.get_current_settings();
@@ -63,7 +63,7 @@ int main()
     mgr.import_from_clipboard_and_create_new_config();
         
     // 7) Delete a config (removes file and entry)
-    mgr.delete_config("my_profile");
+    mgr.delete_config("new_profile");
 
     return 0;
 }
