@@ -9,9 +9,8 @@ JSON configuration manager for applications (C++17, Windows).
 - Import / export configs via clipboard.
 - Rename, delete, refresh configs from the filesystem.
 - Thread-safe access to config data (uses `std::mutex`).
-- Style application hook for ImGui themes.
+- Style application hook for ImGui styling & themes (includes Vullmad, my Mullvad VPN inspired theme).
 - Logging for operations and errors (`logger::get_instance()`).
-- Custom styling & themes (includes Vullmad, my Mullvad VPN inspired theme)
 
 ## Files
 - `ConfigManager.h` / `ConfigManager.cpp` - main config manager and `cheat_settings` serialization. (cheat_settings is an example in this case and only acts as a template)
