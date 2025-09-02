@@ -29,42 +29,64 @@ JSON configuration manager for ImGui applications (C++17, Windows).
 
 ## Very Simply Usage Guide (API overview)
 ```cpp
-#include "config_manager.hpp"
+#include "Config_manager.h"
+#include "StyleManager.h"   // Needed for style applying
 #include <iostream>
 
 int main()
 {
-    // Get singleton manager
-    auto &mgr = config_manager::get_instance();
+    // Initialize ImGui and style registry (must happen after ImGui context is created)
+    config_manager::get_instance().on_imgui_initialized();
 
-    // 1) Create a new config (creates file under %APPDATA%\brasilhook\<name>.json)
-    mgr.create_config("new_profile");
+    // Get the singleton manager
+    auto& mgr = config_manager::get_instance();
 
-    // 2) Get pointer to current settings and modify them
+    // 1) Create a new config
+    if (mgr.create_config("styled_profile")) {
+        std::cout << "Config created: styled_profile\n";
+    }
+
+    // 2) Modify settings (enable aimbot, change FOV, select style index. Ideally this would be accessed through ImGUI with e.g. sliders, user input, toggles, etc)
     cheat_settings* s = mgr.get_current_settings();
     if (s) {
         s->b_aimbot = true;
-        s->i_aimfov = 45;
-        // Persist changes to disk
+        s->i_aimfov = 60;
+        s->style_idx = 2; // e.g., Dark Theme or custom index
         mgr.save_config(mgr.get_cur_config_name());
+        std::cout << "Updated styled_profile with aimbot and style_idx = 2\n";
     }
 
-    // 3) Load an existing config from disk into memory
-    mgr.load_config("my_profile");
-        
-    // 4) Switch active config (without loading from disk)
-    mgr.set_active_config("my_profile");
+    // 3) Load a config (applies stored style automatically)
+    if (mgr.load_config("styled_profile")) {
+        std::cout << "Loaded styled_profile and applied its style.\n";
+    }
 
-    // 5) Export current settings to clipboard (JSON)
-    mgr.copy_to_clipboard(*cur);
+    // 4) Switch active config (does not reload from file, but changes current pointer)
+    if (mgr.set_active_config("styled_profile")) {
+        std::cout << "Switched active config to styled_profile\n";
+    }
 
-    // 6) Import a config from clipboard and create a new config from it
-    //    (parses JSON from clipboard and creates unique name if needed)
-    mgr.import_from_clipboard_and_create_new_config();
-        
-    // 7) Delete a config (removes file and entry)
-    mgr.delete_config("new_profile");
+    // 5) Apply style manually (Also ideally accessed from ImGUI in for example, a dropbox containing the styles)
+    if (auto* current = mgr.get_current_settings()) {
+        mgr.apply_style(*current);
+        std::cout << "Manually applied style for active config.\n";
+    }
+
+    // 6) Export to clipboard (easier sharing among friends)
+    if (auto* current = mgr.get_current_settings()) {
+        mgr.copy_to_clipboard(*current);
+        std::cout << "Exported config to clipboard.\n";
+    }
+
+    // 7) Import from clipboard and create a new config (easy importing)
+    if (mgr.import_from_clipboard_and_create_new_config()) {
+        std::cout << "Imported new config from clipboard and applied style.\n";
+    }
+
+    // 8) Delete a config
+    mgr.delete_config("styled_profile");
 
     return 0;
 }
+
 ```
