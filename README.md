@@ -1,6 +1,6 @@
 # ImGUIConfigSystem
 
-JSON configuration manager for ImGui applications (C++17, Windows).
+JSON configuration manager for applications (C++17, Windows).
 
 ## Features
 - Save / load config files (JSON).
