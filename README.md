@@ -1,4 +1,4 @@
-# GUIConfigSystem
+# ImGUIConfigSystem
 
 JSON configuration manager for ImGui applications (C++17, Windows).
 
