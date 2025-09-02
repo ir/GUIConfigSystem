@@ -90,3 +90,9 @@ int main()
 }
 
 ```
+
+---
+TODO:
+- Integrate keybinds for increased accessibility
+- Version migration
+- Unit tests
