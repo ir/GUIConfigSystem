@@ -1,6 +1,6 @@
 // config_manager.cpp
 
-#include "config_manager.hpp"
+#include "ConfigManager.h"
 
 #include <Windows.h>
 #include <fstream>
